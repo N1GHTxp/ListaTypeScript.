@@ -1,5 +1,5 @@
 function saudacao(nome:string):string{
-return `Olá, ${nome}!`;
+return `iniciando, ${nome}!`;
 }
 
-console.log(saudacao("mundo"));
+console.log(saudacao("😎"));
