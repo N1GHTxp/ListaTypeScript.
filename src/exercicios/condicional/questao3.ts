@@ -7,7 +7,7 @@
 
 const num1: number = Number(prompt("informe um numero: "))
 const num2: number = Number(prompt("informe um segundo numero: "))
-const operacao: number = Number(prompt("1- soma 2- subtração 3- multiplicação 4- divisão: "));
+const operacao: number = Number(prompt("\n1- soma \n2- subtração \n3- multiplicação \n4- divisão: "));
 let resultado: any;
 switch (operacao) {
     case 1:

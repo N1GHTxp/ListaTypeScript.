@@ -1,13 +1,91 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>@n1ghtxp</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0", shrink-to-fit=no>
-    <script src="./dist/exercicios/repetição/questao2.js"></script>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Exercícios</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        h1 { margin-bottom: 1.5rem; }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .exercise-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exercise-item {
+            margin-bottom: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .exercise-item:hover {
+            transform: translateX(5px);
+            border-color: var(--primary);
+        }
+
+        .exercise-link {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .exercise-link span {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+    </style>
+</head>
 <body>
-  <h1>Questões</h1>
+
+    <h1>📚 Painel de Exercícios</h1>
+
+    <div class="container">
+        <ul class="exercise-list">
+            <li class="exercise-item">
+                <a href="menu-condicional.html" class="exercise-link">
+                    <span>01.</span> condicional
+                </a>
+            </li>
+            <li class="exercise-item">
+                <a href="menu-funcao.html" class="exercise-link">
+                    <span>02.</span> função
+                </a>
+            </li>
+            <li class="exercise-item">
+                <a href="menu-repeticao.html" class="exercise-link">
+                    <span>03.</span> repetição
+                </a>
+            </li>
+        </ul>
+    </div>
+
 </body>
 </html>
