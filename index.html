@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,71 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="src\img\icone2.png" type="image/png">
     <title>Meus Exercícios</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --bg: #f8fafc;
-            --text: #1e293b;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        h1 { margin-bottom: 1.5rem; }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-
-        .exercise-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .exercise-item {
-            margin-bottom: 0.8rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .exercise-item:hover {
-            transform: translateX(5px);
-            border-color: var(--primary);
-        }
-
-        .exercise-link {
-            display: block;
-            padding: 1rem;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        .exercise-link span {
-            color: var(--primary);
-            margin-right: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <h1>📚 Painel de Exercícios</h1>
     <a href="src/img/download.png" target="_blank"><img src="src/img/download.png" height="90" width="500"></a>
 
-    <div class="container">
+    <div class="container page-card">
         <ul class="exercise-list">
             <li class="exercise-item">
                 <a href="menu-condicional.html" class="exercise-link">
@@ -86,8 +31,32 @@
                     <span>03.</span> repetição
                 </a>
             </li>
+            <li class="exercise-item">
+                <a href="menu-arrays.html" class="exercise-link">
+                    <span>04.</span> arrays
+                </a>
+            </li>
         </ul>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.page-card').forEach(card => card.classList.add('enter'));
+            document.querySelectorAll('.exercise-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const item = this.parentElement;
+                    const card = this.closest('.page-card');
+                    item.classList.add('expanding');
+                    this.classList.add('expanding');
+                    if (card) card.classList.remove('enter');
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 450);
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

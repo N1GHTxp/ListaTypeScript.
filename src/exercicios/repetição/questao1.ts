@@ -1,18 +1,31 @@
-// 1. Crie um programa que peça números até o usuário digitar 0 e mostre:
-//  Quantidade de números digitados
-//  Soma total
+/**
+ * Questão 1: Contar e somar números até 0
+ * Crie um programa que peça números até o usuário digitar 0 e mostre:
+ * - Quantidade de números digitados
+ * - Soma total
+ */
 
-let quantidadeNumeros: number = 0;
-let somaTotal: number = 0;
-let numero: number;
+const prompter = (question: string) => prompt(question) ?? "";
 
-do {
-    numero = Number(prompt("Digite um número (0 para encerrar): "));
+function contarESomar(): void {
+  let numero: number;
+  let quantidade: number = 0;
+  let soma: number = 0;
+
+  do {
+    numero = Number(prompter("Digite um número (0 para sair): "));
+
     if (numero !== 0) {
-        quantidadeNumeros++;
-        somaTotal += numero;
+      quantidade++;
+      soma += numero;
     }
-} while (numero !== 0);
+  } while (numero !== 0);
 
-document.writeln(`Quantidade de números digitados: ${quantidadeNumeros}`);
-document.writeln(`Soma total: ${somaTotal}`);
+  console.log(`\nQuantidade de números digitados: ${quantidade}`);
+  console.log(`Soma total: ${soma}`);
+}
+
+// Executar
+contarESomar();
+
+\nexport {};\n
