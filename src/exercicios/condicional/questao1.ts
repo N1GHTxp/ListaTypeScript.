@@ -1,23 +1,24 @@
-/**
- * Questão 1: Verificar se número é par/ímpar e positivo/negativo
- * Crie um programa que leia um número e informe se ele é:
- * - Par ou Ímpar
- * - Positivo ou Negativo
- */
+// 1. Crie um programa que leia um número e informe se ele é:
+//  Par ou Ímpar
+//  Positivo ou Negativo
 
-const prompter = (question: string) => prompt(question) ?? "";
+const numero: number = parseFloat(prompt("Digite um número:") || "0");
 
-function verificarNumero(): void {
-  const numero = Number(prompter("Digite um número: "));
-
-  let paridade: string = numero % 2 === 0 ? "Par" : "Ímpar";
-  let sinal: string = numero > 0 ? "Positivo" : numero < 0 ? "Negativo" : "Zero";
-
-  console.log(`O número ${numero} é ${paridade} e ${sinal}`);
+if (isNaN(numero)) {
+    console.log("Por favor, digite um número válido.");
 }
+else {
+    if (numero % 2 === 0) {
+        console.log("O número é Par.");
+    } else {
+        console.log("O número é Ímpar.");
+    }
 
-// Executar
-verificarNumero();
-
-
-\nexport {};\n
+    if (numero > 0) {
+        console.log("O número é Positivo.");
+    } else if (numero < 0) {
+        console.log("O número é Negativo.");
+    } else {
+        console.log("O número é Zero.");
+    }
+}

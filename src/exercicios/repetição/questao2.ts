@@ -1,21 +1,12 @@
-/**
- * Questão 2: Desenvolver tabuada com for
- * Desenvolva a tabuada de um número usando for.
- */
+// 2. Desenvolva a tabuada de um número usando for.
 
-const prompter = (question: string) => prompt(question) ?? "";
-
-function tabuada(): void {
-  const numero = Number(prompter("Digite um número para ver a tabuada: "));
-
-  console.log(`\nTabuada do ${numero}:`);
-  for (let i = 1; i <= 10; i++) {
-    console.log(`${numero} x ${i} = ${numero * i}`);
-  }
+const numero: number = parseInt(prompt("Digite um número para ver a tabuada:") || "0");
+if (isNaN(numero)) {
+    console.log("Por favor, digite um número válido.");
 }
-
-// Executar
-tabuada();
-
-
-\nexport {};\n
+else {
+    console.log(`Tabuada de ${numero}:`);
+    for (let i = 1; i <= 10; i++) {
+        console.log(`${numero} x ${i} = ${numero * i}`);
+    }
+}

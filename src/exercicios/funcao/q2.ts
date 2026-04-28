@@ -1,51 +1,40 @@
-/**
- * Questão 2: Monitor de temperatura
- * O IF tem uma estufa e o professor de biologia quer um sistema simples para monitorar a temperatura.
- */
+// 2. O IF tem uma estufa e o professor de biologia quer um sistema simples para monitorar a
+// temperatura.
+// ● Crie uma função ler_temperatura():
+// o Simula a leitura de um sensor, pedindo ao usuário para digitar uma temperatura
+// (valor inteiro ou float).
+// o Retorna a temperatura lida.
+// ● Crie uma função verificar_alerta_temperatura(temperatura):
+// o Recebe a temperatura.
+// o Se a temperatura for menor que 10 ou maior que 30, retorna True (alerta).
+// o Caso contrário, retorna False.
+// ● Crie uma função emitir_mensagem_alerta(status_alerta):
+// o Recebe o status_alerta (True ou False).
+// o Se status_alerta for True, imprime &quot;ALERTA: Temperatura fora da faixa ideal!&quot;.
+// o Se status_alerta for False, imprime &quot;Temperatura dentro da faixa normal.&quot;.
 
-const prompter = (question: string) => prompt(question) ?? "";
-
-function lerTemperatura(): number {
-  const temperatura = Number(prompter("Digite a temperatura lida pelo sensor (°C): "));
-  return temperatura;
+function ler_temperatura(): number {
+    const input: string | null = prompt("Digite a temperatura (em graus):");
+    if (input === null) {
+        throw new Error("Entrada cancelada pelo usuário.");
+    }
+    const temperatura: number = parseFloat(input);
+    if (isNaN(temperatura)) {
+        throw new Error("Por favor, digite um valor de temperatura válido.");
+    }
+    return temperatura;
 }
 
-function verificarAlertaTemperatura(temperatura: number): boolean {
-  return temperatura < 10 || temperatura > 30;
+function verificar_alerta_temperatura(temperatura: number): boolean {
+    return temperatura < 10 || temperatura > 30;
 }
 
-function emitirMensagemAlerta(statusAlerta: boolean): void {
-  if (statusAlerta) {
-    console.log("ALERTA: Temperatura fora da faixa ideal!");
-  } else {
-    console.log("Temperatura dentro da faixa normal.");
-  }
+function emitir_mensagem_alerta(status_alerta: boolean): void {
+    if (status_alerta) {
+        console.log("ALERTA: Temperatura fora da faixa ideal!");
+    }
+    else {
+        console.log("Temperatura dentro da faixa normal.");
+    }
 }
 
-function monitorarTemperatura(): void {
-  const temperatura = lerTemperatura();
-  const alerta = verificarAlertaTemperatura(temperatura);
-  emitirMensagemAlerta(alerta);
-}
-
-// Exemplos
-console.log("Sistema de Monitoramento de Temperatura\n");
-
-// Teste 1: Temperatura normal
-console.log("Teste 1: 22°C");
-emitirMensagemAlerta(verificarAlertaTemperatura(22));
-
-// Teste 2: Temperatura muito baixa
-console.log("\nTeste 2: 5°C");
-emitirMensagemAlerta(verificarAlertaTemperatura(5));
-
-// Teste 3: Temperatura muito alta
-console.log("\nTeste 3: 35°C");
-emitirMensagemAlerta(verificarAlertaTemperatura(35));
-
-// Executar interativo
-console.log("\n--- Modo interativo ---");
-monitorarTemperatura();
-
-
-\nexport {};\n

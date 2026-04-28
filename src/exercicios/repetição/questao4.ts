@@ -1,34 +1,29 @@
-/**
- * Questão 4: Contar pares e ímpares até -1
- * Faça um programa que leia um conjunto de números (X) e imprima a quantidade de
- * números pares (QPares) e a quantidade de números ímpares (QImpares) lidos.
- * Admita que o valor -1 é utilizado como sentinela para fim de leitura.
- */
+// 4. Faça um programa que leia um conjunto de números (X) e imprima a quantidade de
+// números pares (QPares) e a quantidade de números ímpares (QImpares) lidos. Admita que o
+// valor -1 é utilizado como sentinela para fim de leitura.
 
-const prompter = (question: string) => prompt(question) ?? "";
-
-function contarParesEImpares(): void {
-  let qPares = 0;
-  let qImpares = 0;
-  let numero: number;
-
-  do {
-    numero = Number(prompter("Digite um número (-1 para sair): "));
-
-    if (numero !== -1) {
-      if (numero % 2 === 0) {
-        qPares++;
-      } else {
-        qImpares++;
-      }
+let QPares: number = 0;
+let QImpares: number = 0;
+while (true) {
+    const input: string | null = prompt("Digite um número (-1 para sair):");
+    if (input === null) {
+        console.log("Entrada cancelada pelo usuário.");
+        break;
     }
-  } while (numero !== -1);
-
-  console.log(`\nQuantidade de números pares: ${qPares}`);
-  console.log(`Quantidade de números ímpares: ${qImpares}`);
+    const numero: number = parseFloat(input);
+    if (isNaN(numero)) {
+        console.log("Por favor, digite um número válido.");
+        continue;
+    }
+    if (numero === -1) {
+        break;
+    }
+    if (numero % 2 === 0) {
+        QPares++;
+    }
+    else {
+        QImpares++;
+    }
 }
-
-// Executar
-contarParesEImpares();
-
-\nexport {};\n
+console.log(`Quantidade de números pares: ${QPares}`);
+console.log(`Quantidade de números ímpares: ${QImpares}`);

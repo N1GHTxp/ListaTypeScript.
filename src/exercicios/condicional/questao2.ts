@@ -1,33 +1,52 @@
-/**
- * Questão 2: Determinar estação do ano baseada no mês
- */
+// 2. Crie um programa chamado Estações. Este programa deve ler uma data e armazenar na
+// variável mês, um número entre 1 e 12, correspondendo a um dos meses do ano. No final,
+// você deve imprimir uma mensagem conforme o exemplo: &quot;A estação do ano correspondente
+// ao mês 3 é Verão&quot; Considere a estação prevalente para cada mês:
+// a) Janeiro (1): Verão
+// b) Fevereiro (2): Verão
+// c) Março (3): Verão
+// d) Abril (4): Outono
+// e) Maio (5): Outono
+// f) Junho (6): Outono
+// g) Julho (7): Inverno
+// h) Agosto (8): Inverno
+// i) Setembro (9): Inverno
+// j) Outubro (10): Primavera
+// k) Novembro (11): Primavera
+// l) Dezembro (12): Primavera
 
-const prompter = (question: string) => prompt(question) ?? "";
+const mes: number = parseInt(prompt("Digite o número do mês (1-12):") || "0");
 
-function determinarEstacao(): void {
-  const mes = Number(prompter("Digite um número entre 1 e 12 (mês): "));
-
-  if (mes < 1 || mes > 12) {
-    console.log("Mês inválido! Digite um número entre 1 e 12.");
-    return;
-  }
-
-  let estacao: string;
-
-  if (mes >= 1 && mes <= 3) {
-    estacao = "Verão";
-  } else if (mes >= 4 && mes <= 6) {
-    estacao = "Outono";
-  } else if (mes >= 7 && mes <= 9) {
-    estacao = "Inverno";
-  } else {
-    estacao = "Primavera";
-  }
-
-  console.log(`A estação do ano correspondente ao mês ${mes} é ${estacao}`);
+if (isNaN(mes) || mes < 1 || mes > 12) {
+    console.log("Por favor, digite um número de mês válido (1-12).");
 }
+else {
+    let estacao: string;
 
-// Executar
-determinarEstacao();
+    switch (mes) {
+        case 1:
+        case 2:
+        case 3:
+            estacao = "Verão";
+            break;
+        case 4:
+        case 5:
+        case 6:
+            estacao = "Outono";
+            break;
+        case 7:
+        case 8:
+        case 9:
+            estacao = "Inverno";
+            break;
+        case 10:
+        case 11:
+        case 12:
+            estacao = "Primavera";
+            break;
+        default:
+            estacao = "Desconhecida";
+    }
 
-\nexport {};\n
+    console.log(`A estação do ano correspondente ao mês ${mes} é ${estacao}.`);
+}
