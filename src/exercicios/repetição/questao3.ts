@@ -16,50 +16,52 @@ interface Funcionario {
 
 let funcionarios: Funcionario[] = [];
 
-while (true) {
-    const nome: string = prompt("Digite o nome do funcionário:") || "";
-    const horasTrabalhadas: number = parseFloat(prompt("Digite as horas trabalhadas:") || "0");
-    const salarioHora: number = parseFloat(prompt("Digite o salário por hora:") || "0");
-    const sexo: string = prompt("Digite o sexo do funcionário (M/F):") || "";
-    if (nome === "" || isNaN(horasTrabalhadas) || isNaN(salarioHora) || (sexo.toUpperCase() !== "M" && sexo.toUpperCase() !== "F")) {
-        console.log("Por favor, preencha todos os campos corretamente.");
-        continue;
-    }
-    funcionarios.push({ nome, horasTrabalhadas, salarioHora, sexo: sexo.toUpperCase() });
-
-    const continuar: string = prompt("Deseja cadastrar outro funcionário? (S/N):") || "";
-    if (continuar.toUpperCase() !== "S") {
-        break;
+function cadastrarFuncionario(): void {
+    let funcionario: Funcionario = {
+        nome: prompt("Nome do funcionário: ") || "",
+        horasTrabalhadas: Number(prompt("Horas trabalhadas: ")) || 0,
+        salarioHora: Number(prompt("Salário por hora: ")) || 0,
+        sexo: prompt("Sexo (M/F): ") || ""
+    };
+    funcionarios.push(funcionario);
+    let continuar = prompt("Deseja cadastrar outro funcionário? (S/N): ");
+    if (continuar?.toUpperCase() === "S") {
+        cadastrarFuncionario();
     }
 }
 
-let salarioTotal: number = 0;
-let maiorSalario: number = 0;
-let nomeMaiorSalario: string = "";
-let countMasculino: number = 0;
-let countFeminino: number = 0;
-for (const funcionario of funcionarios) {
-    const salarioFuncionario = funcionario.horasTrabalhadas * funcionario.salarioHora;
-    salarioTotal += salarioFuncionario;
-    if (salarioFuncionario > maiorSalario) {
-        maiorSalario = salarioFuncionario;
-        nomeMaiorSalario = funcionario.nome;
+function calcularResultados(): void {
+    let salarioTotal = 0;
+    let maiorSalario = 0;
+    let nomeMaiorSalario = "";
+    let countMasculino = 0;
+    let countFeminino = 0;
+
+    for (let funcionario of funcionarios) {
+        let salario = funcionario.horasTrabalhadas * funcionario.salarioHora;
+        salarioTotal += salario;
+        if (salario > maiorSalario) {
+            maiorSalario = salario;
+            nomeMaiorSalario = funcionario.nome;
+        }
+        if (funcionario.sexo.toUpperCase() === "M") {
+            countMasculino++;
+        } else if (funcionario.sexo.toUpperCase() === "F") {
+            countFeminino++;
+        }
     }
-    if (funcionario.sexo === "M") {
-        countMasculino++;
-    }
-    else if (funcionario.sexo === "F") {
-        countFeminino++;
-    }
+
+    let totalFuncionarios = countMasculino + countFeminino;
+    let percentualMasculino = (countMasculino / totalFuncionarios) * 100;
+    let percentualFeminino = (countFeminino / totalFuncionarios) * 100;
+
+    document.writeln("Salário total dos funcionários: " + salarioTotal + "<br>");
+    document.writeln("Maior salário: " + maiorSalario + " (Funcionário: " + nomeMaiorSalario + ")<br>");
+    document.writeln("Número de funcionários masculinos: " + countMasculino + "<br>");
+    document.writeln("Número de funcionários femininos: " + countFeminino + "<br>");
+    document.writeln("Percentual de funcionários masculinos: " + percentualMasculino + "%<br>");
+    document.writeln("Percentual de funcionários femininos: " + percentualFeminino + "%<br>");
 }
 
-const totalFuncionarios = countMasculino + countFeminino;
-const percentualMasculino = totalFuncionarios > 0 ? (countMasculino / totalFuncionarios) * 100 : 0;
-const percentualFeminino = totalFuncionarios > 0 ? (countFeminino / totalFuncionarios) * 100 : 0;
-
-console.log(`Salário total dos funcionários: R$ ${salarioTotal.toFixed(2)}`);
-console.log(`Maior salário: R$ ${maiorSalario.toFixed(2)}, recebido por: ${nomeMaiorSalario}`);
-console.log(`Número de funcionários do sexo masculino: ${countMasculino}`);
-console.log(`Número de funcionários do sexo feminino: ${countFeminino}`);
-console.log(`Percentual de funcionários homens: ${percentualMasculino.toFixed(2)}%`);
-console.log(`Percentual de funcionários mulheres: ${percentualFeminino.toFixed(2)}%`);
+cadastrarFuncionario();
+calcularResultados();

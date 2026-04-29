@@ -15,39 +15,33 @@
 function classificarVenda(valor: number): string {
     if (valor < 1000) {
         return "Bronze";
-    }
-    else if (valor >= 1000 && valor <= 5000) {
+    } else if (valor >= 1000 && valor <= 5000) {
         return "Prata";
-    }
-    else {
+    } else {
         return "Ouro";
     }
 }
 
-let totalVendas: number = 0;
-let maiorVenda: number = 0;
-let vendedorMaiorVenda: number = 0;
-let countOuro: number = 0;
+let totalVendas = 0;
+let maiorVenda = 0;
+let vendedorMaiorVenda = "";
+let contOuro = 0;
 
 for (let i = 1; i <= 5; i++) {
-    const valorVenda: number = parseFloat(prompt(`Digite o valor da venda do vendedor ${i}:`) || "0");
-    if (isNaN(valorVenda)) {
-        console.log("Por favor, digite um valor de venda válido.");
-        i--;
-        continue;
-    }
+    let valorVenda = parseFloat(prompt(`Digite o valor da venda do vendedor ${i}:`));
     totalVendas += valorVenda;
+    
+    let classificacao = classificarVenda(valorVenda);
+    if (classificacao === "Ouro") {
+        contOuro++;
+    }
 
     if (valorVenda > maiorVenda) {
         maiorVenda = valorVenda;
-        vendedorMaiorVenda = i;
-    }
-    const categoria: string = classificarVenda(valorVenda);
-    if (categoria === "Ouro") {
-        countOuro++;
+        vendedorMaiorVenda = `Vendedor ${i}`;
     }
 }
 
-console.log(`Total de vendas da equipe: ${totalVendas}`);
-console.log(`O vendedor com a maior venda é o vendedor ${vendedorMaiorVenda} com uma venda de ${maiorVenda}.`);
-console.log(`Quantidade de vendedores que atingiram a categoria "Ouro": ${countOuro}.`);
+document.write(`Total de vendas da equipe: R$ ${totalVendas.toFixed(2)}<br>`);
+document.write(`Vendedor com a maior venda: ${vendedorMaiorVenda} (R$ ${maiorVenda.toFixed(2)})<br>`);
+document.write(`Quantidade de vendedores na categoria Ouro: ${contOuro}`);

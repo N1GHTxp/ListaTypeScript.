@@ -2,24 +2,17 @@
 //  Quantidade de números digitados
 //  Soma total
 
-let quantidade: number = 0;
-let soma: number = 0;
-while (true) {
-    const input: string | null = prompt("Digite um número (0 para sair):");
-    if (input === null) {
-        console.log("Entrada cancelada pelo usuário.");
-        break;
+let quantidadeNumeros: number = 0;
+let somaTotal: number = 0;
+let numero: number;
+
+do {
+    numero = Number(prompt("Digite um número (0 para encerrar): "));
+    if (numero !== 0) {
+        quantidadeNumeros++;
+        somaTotal += numero;
     }
-    const numero: number = parseFloat(input);
-    if (isNaN(numero)) {
-        console.log("Por favor, digite um número válido.");
-        continue;
-    }
-    if (numero === 0) {
-        break;
-    }
-    quantidade++;
-    soma += numero;
-}
-console.log(`Quantidade de números digitados: ${quantidade}`);
-console.log(`Soma total: ${soma}`);
+} while (numero !== 0);
+
+console.log(`Quantidade de números digitados: ${quantidadeNumeros}`);
+console.log(`Soma total: ${somaTotal}`);
