@@ -12,8 +12,8 @@ function somarAte(numero) {
 let numero = parseInt(prompt("Digite um número inteiro positivo:"));
 if (numero > 0) {
     let resultado = somarAte(numero);
-    document.write(`A soma de 1 até ${numero} é: ${resultado}`);
+    console.log(`A soma de 1 até ${numero} é: ${resultado}`);
 }
 else {
-    document.write("Por favor, digite um número inteiro positivo.");
+    console.log("Por favor, digite um número inteiro positivo.");
 }

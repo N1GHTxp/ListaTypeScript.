@@ -10,3 +10,10 @@ presenca.push("Bob");
 presenca.push("Charlie");
 presenca.push("Diana");
 presenca.push("Eve");
+
+
+// presenca.push(123); // Isso causará um erro de compilação
+
+for (let nome of presenca) {
+    console.log(nome.toUpperCase());
+}

@@ -24,3 +24,5 @@ if (distancia > 0 && combustivelGasto > 0 && capacidadeTanque > 0) {
 } else {
     console.log("Por favor, digite valores positivos para distância, combustível gasto e capacidade do tanque.");
 }
+
+

@@ -26,9 +26,9 @@ function verificar_alerta_temperatura(temperatura: number): boolean {
 
 function emitir_mensagem_alerta(status_alerta: boolean): void {
     if (status_alerta) {
-        document.write("ALERTA: Temperatura fora da faixa ideal!");
+        console.log("ALERTA: Temperatura fora da faixa ideal!");
     } else {
-        document.write("Temperatura dentro da faixa normal.");
+        console.log("Temperatura dentro da faixa normal.");
     }
 }
 

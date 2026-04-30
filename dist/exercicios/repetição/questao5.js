@@ -39,6 +39,6 @@ for (let i = 1; i <= 5; i++) {
         vendedorMaiorVenda = `Vendedor ${i}`;
     }
 }
-document.write(`Total de vendas da equipe: R$ ${totalVendas.toFixed(2)}<br>`);
-document.write(`Vendedor com a maior venda: ${vendedorMaiorVenda} (R$ ${maiorVenda.toFixed(2)})<br>`);
-document.write(`Quantidade de vendedores na categoria Ouro: ${contOuro}`);
+console.log(`Total de vendas da equipe: R$ ${totalVendas.toFixed(2)}`);
+console.log(`Vendedor com a maior venda: ${vendedorMaiorVenda} (R$ ${maiorVenda.toFixed(2)})`);
+console.log(`Quantidade de vendedores na categoria Ouro: ${contOuro}`);

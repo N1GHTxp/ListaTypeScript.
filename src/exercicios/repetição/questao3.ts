@@ -55,12 +55,12 @@ function calcularResultados(): void {
     let percentualMasculino = (countMasculino / totalFuncionarios) * 100;
     let percentualFeminino = (countFeminino / totalFuncionarios) * 100;
 
-    document.writeln("Salário total dos funcionários: " + salarioTotal + "<br>");
-    document.writeln("Maior salário: " + maiorSalario + " (Funcionário: " + nomeMaiorSalario + ")<br>");
-    document.writeln("Número de funcionários masculinos: " + countMasculino + "<br>");
-    document.writeln("Número de funcionários femininos: " + countFeminino + "<br>");
-    document.writeln("Percentual de funcionários masculinos: " + percentualMasculino + "%<br>");
-    document.writeln("Percentual de funcionários femininos: " + percentualFeminino + "%<br>");
+    console.log("Salário total dos funcionários: " + salarioTotal + "<br>");
+    console.log("Maior salário: " + maiorSalario + " (Funcionário: " + nomeMaiorSalario + ")<br>");
+    console.log("Número de funcionários masculinos: " + countMasculino + "<br>");
+    console.log("Número de funcionários femininos: " + countFeminino + "<br>");
+    console.log("Percentual de funcionários masculinos: " + percentualMasculino + "%<br>");
+    console.log("Percentual de funcionários femininos: " + percentualFeminino + "%<br>");
 }
 
 cadastrarFuncionario();

@@ -10,7 +10,7 @@ function desenharTriangulo(n) {
         for (let j = 1; j <= i; j++) {
             linha += "*";
         }
-        document.write(linha + "<br>");
+        console.log(linha);
     }
 }
 let numero = parseInt(prompt("Digite um número para desenhar o triângulo de asteriscos:"));
@@ -18,5 +18,5 @@ if (numero > 0) {
     desenharTriangulo(numero);
 }
 else {
-    document.write("Por favor, digite um número inteiro positivo.");
+    console.log("Por favor, digite um número inteiro positivo.");
 }

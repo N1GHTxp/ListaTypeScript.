@@ -51,3 +51,13 @@ function calcularFolhaPagamento(valorHora, horasTrabalhadas) {
     console.log(`Total de descontos : R$ ${totalDescontos.toFixed(2)}`);
     console.log(`Salário Líquido : R$ ${salarioLiquido.toFixed(2)}`);
 }
+
+let valorHora = parseFloat(prompt("Digite o valor da sua hora:"));
+let horasTrabalhadas = parseFloat(prompt("Digite a quantidade de horas trabalhadas no mês:"));
+
+if (valorHora > 0 && horasTrabalhadas > 0) {
+    calcularFolhaPagamento(valorHora, horasTrabalhadas);
+}
+else {
+    console.log("Por favor, digite valores positivos para o valor da hora e as horas trabalhadas.");
+}
