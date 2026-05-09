@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Questões</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="questoes-body">
+
+    <div class="questoes-container">
+        <h1>Selecione uma Questão</h1>
+        <select id="questionSelect">
+            <option value="">Selecione uma questão...</option>
+        </select>
+
+        <div class="bloco">
+            <h2>Enunciado</h2>
+            <p id="enunciado">Selecione uma questão para ver o enunciado.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>Resultado (Console)</h2>
+            <button class="btn-executar" onclick="executarQuestao()">Executar Código</button>
+            <div id="resultado">Clique no botão e interaja conforme necessário...</div>
+        </div>
+
+        <div class="bloco">
+            <h2>Código da Questão</h2>
+            <pre id="codigo-js">Selecione uma questão para ver o código.</pre>
+        </div>
+    </div>
+
+<script>
+const data = {
+  "arrays": {
+    "questao1": {
+      "enunciado": "Mostre-me as seguintes listas, derivadas de: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]\nNúmeros pares\nNúmeros ímpares\nTodos os múltiplos de 2,3 e 4\nLista reversa",
+      "codigo": "const numeros: number[] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];\n\nconst numerosPares: number[] = numeros.filter(num => num % 2 === 0);\nconst numerosImpares: number[] = numeros.filter(num => num % 2 !== 0);\nconst multiplosDe2_3_4: number[] = numeros.filter(num => num % 2 === 0 || num % 3 === 0 || num % 4 === 0);\nconst listaReversa: number[] = [...numeros].reverse();\n\nconsole.log(\"Números pares:\", numerosPares);\nconsole.log(\"Números ímpares:\", numerosImpares);\nconsole.log(\"Múltiplos de 2, 3 e 4:\", multiplosDe2_3_4);\nconsole.log(\"Lista reversa:\", listaReversa);"
+    },
+    "questao2": {
+      "enunciado": "Faça um programa que leia um número indeterminado de notas ou -1 para encerrar. Após esta entrada de dados, faça o seguinte:\nMostre a quantidade de notas que foram lidas.\nExiba todas as notas na ordem em que foram informadas.\nExiba todas as notas na ordem inversa à que foram informadas.\nCalcule e mostre a soma das notas.\nCalcule e mostre a média das notas.\nCalcule e mostre a quantidade de notas acima da média calculada.",
+      "codigo": "let notas: number[] = [];\nlet entrada: number;\n\ndo {\n    entrada = parseFloat(prompt(\"Digite uma nota (ou -1 para encerrar):\"));\n    if (entrada !== -1) {\n        notas.push(entrada);\n    }\n} while (entrada !== -1);\n\nconsole.log(\"Quantidade de notas lidas:\", notas.length);\nconsole.log(\"Notas na ordem informada:\", notas);\nconsole.log(\"Notas na ordem inversa:\", [...notas].reverse());\n\nconst soma = notas.reduce((acc, nota) => acc + nota, 0);\nconst media = soma / notas.length;\n\nconsole.log(\"Soma das notas:\", soma);\nconsole.log(\"Média das notas:\", media);\nconsole.log(\"Notas acima da média:\", notas.filter(nota => nota > media));"
+    },
+    "questao3": {
+      "enunciado": "Gerador de Lista de Compras Personalizada\nSua mãe pediu para você fazer uma lista de compras para o supermercado. Ela quer que você possa adicionar itens e a quantidade de cada um.\nCrie uma função chamada gerar_lista_compras() que não recebe argumentos. A função deve:\nPermitir que o usuário adicione itens à lista(array) até que ele digite \"fim\".\nPermitir que o usuário apresente todos os itens da lista.\nPermitir que o usuário apresente quantos itens há na lista.\nPermitir que o usuário remova itens da lista.",
+      "codigo": "function gerar_lista_compras(): void {\n    let listaCompras: { item: string, quantidade: number }[] = [];\n    let entrada: string;\n    \n    do {\n        entrada = prompt(\"Digite o item (ou 'fim' para encerrar):\");\n        if (entrada !== \"fim\") {\n            let quantidade = parseInt(prompt(\"Digite a quantidade:\"));\n            listaCompras.push({ item: entrada, quantidade });\n        }\n    } while (entrada !== \"fim\");\n\n    console.log(\"Lista de Compras:\", listaCompras);\n    console.log(\"Quantidade de itens na lista:\", listaCompras.length);\n\n    let itemParaRemover = prompt(\"Digite o item que deseja remover:\");\n    listaCompras = listaCompras.filter(item => item.item !== itemParaRemover);\n    console.log(\"Lista de Compras atualizada:\", listaCompras);\n}\n\ngerar_lista_compras();"
+    },
+    "questao4": {
+      "enunciado": "Calculadora de Média do ENEM\nUm professor de cursinho pré-ENEM precisa de uma ferramenta para calcular a média de seus alunos em diferentes disciplinas. Ele quer que a média seja arredondada para duas casas decimais.\nCrie uma função chamada calcular_media(notas) que receba um array de notas como argumento. A função deve:\nCalcular a média das notas.\nArredondar a média para duas casas decimais.\nRetornar o valor da média.",
+      "codigo": "function calcular_media(notas: number[]): number {\n    const soma = notas.reduce((acc, nota) => acc + nota, 0);\n    const media = soma / notas.length;\n    return parseFloat(media.toFixed(2));\n}\n\nlet notasAluno: number[] = [];\nlet entrada: number;\n\ndo {\n    entrada = parseFloat(prompt(\"Digite uma nota do aluno (ou -1 para encerrar):\"));\n    if (entrada !== -1) {\n        notasAluno.push(entrada);\n    }\n} while (entrada !== -1);\n\nif (notasAluno.length > 0) {\n    const mediaAluno = calcular_media(notasAluno);\n    console.log(\"Média do aluno:\", mediaAluno);\n} else {\n    console.log(\"Nenhuma nota foi informada.\");\n}"
+    },
+    "questao5": {
+      "enunciado": "Organizador de Tarefas Diárias\nVocê quer organizar suas tarefas de casa e da escola para não esquecer nada. Crie uma função chamada gerenciar_tarefas() que não receba argumentos. A função deve:\nPermitir que o usuário adicione tarefas a um vetor.\nPermitir que o usuário marque tarefas como concluídas (removendo-as da lista, por exemplo).\nPermitir que o usuário exiba todas as tarefas pendentes.\nUtilize um menu interativo com opções (adicionar, concluir, exibir, sair) e um laço while para manter o programa rodando até o usuário escolher sair.",
+      "codigo": "function gerenciar_tarefas(): void {\n    let tarefas: string[] = [];\n    let opcao: string;\n\n    do {\n        opcao = prompt(\"Escolha uma opção: (1) Adicionar tarefa, (2) Concluir tarefa, (3) Exibir tarefas, (4) Sair\");\n        switch (opcao) {\n            case \"1\":\n                let novaTarefa = prompt(\"Digite a nova tarefa:\");\n                tarefas.push(novaTarefa);\n                console.log(\"Tarefa adicionada.\");\n                break;\n            case \"2\":\n                let tarefaConcluida = prompt(\"Digite a tarefa que deseja concluir:\");\n                tarefas = tarefas.filter(tarefa => tarefa !== tarefaConcluida);\n                console.log(\"Tarefa concluída.\");\n                break;\n            case \"3\":\n                console.log(\"Tarefas pendentes:\");\n                tarefas.forEach(tarefa => console.log(\"- \" + tarefa));\n                break;\n            case \"4\":\n                console.log(\"Saindo do gerenciador de tarefas.\");\n                break;\n            default:\n                console.log(\"Opção inválida. Por favor, escolha uma opção válida.\");\n        }\n    } while (opcao !== \"4\");\n}\n\ngerenciar_tarefas();"
+    },
+    "questao6": {
+      "enunciado": "Crie um Array vazio que irá armazenar 15 nomes de pessoas (usando laço de repetição);\nPedir os nomes das pessoas usando o Prompt e o método push();\nApresentar os nomes digitados;\nOrdenar o vetor usando o sort();\nApresentar os nomes inseridos de forma ordenada.",
+      "codigo": "let nomes: string[] = [];\n\nfor (let i = 0; i < 15; i++) {\n    let nome = prompt(\"Digite o nome da pessoa:\");\n    nomes.push(nome);\n}\n\nconsole.log(\"Nomes digitados:\");\nnomes.forEach(nome => console.log(\"- \" + nome));\n\nnomes.sort();\nconsole.log(\"Nomes ordenados:\");\nnomes.forEach(nome => console.log(\"- \" + nome));"
+    },
+    "questao7": {
+      "enunciado": "Lista de Presença\nCrie um array chamado presenca que aceite apenas strings.\nAdicione 5 nomes de alunos.\nTente adicionar um número e observe o erro do compilador.\nUse um loop para imprimir cada nome em letras maiúsculas.",
+      "codigo": "let presenca: string[] = [];\n\npresenca.push(\"Alice\");\npresenca.push(\"Bob\");\npresenca.push(\"Charlie\");\npresenca.push(\"Diana\");\npresenca.push(\"Eve\");\n\n// presenca.push(123); // Isso causará um erro de compilação\n\nfor (let nome of presenca) {\n    console.log(nome.toUpperCase());\n}"
+    },
+    "questao8": {
+      "enunciado": "Boletim Híbrido\nCrie um array chamado notasSemestre que possa receber number ou a string \"N.A\" (Não Avaliado).\nInsira os valores: 8.5, 10, \"N.A\", 7.2.\nCrie uma lógica que percorra o array e:\nSe for um número, imprima: \"Nota: [valor]\".\nSe for \"N.A\", imprima: \"O aluno não realizou a prova\".",
+      "codigo": "let notasSemestre: (number | string)[] = [8.5, 10, \"N.A\", 7.2];\n\nfor (let nota of notasSemestre) {\n    if (typeof nota === \"number\") {\n        console.log(`Nota: ${nota}`);\n    }\n    else if (nota === \"N.A\") {\n        console.log(\"O aluno não realizou a prova\");\n    }\n}"
+    },
+    "questao9": {
+      "enunciado": "Implemente uma função chamada gerarIntervaloFiltrado que receba dois parâmetros numéricos: inicio e fim. A função deve seguir os seguintes requisitos:\nAntes de iniciar o laço, verifique se o valor de inicio é menor ou igual ao valor de fim. Caso não seja, exiba uma mensagem de erro ou inverta os valores para garantir que o intervalo seja válido.\nUtilize uma estrutura de repetição (for ou while) para percorrer todos os números inteiros contidos nesse intervalo (inclusive o início e o fim).\nDurante a iteração, armazene todos os números do intervalo em um array.\nApós preencher o array, utilize um novo laço de repetição (ou um método de array) para percorrer a lista criada.\nImprima no console apenas os números que são múltiplos e divisores da sua idade.\nAo final, exiba a quantidade total de números que foram impressos.",
+      "codigo": "function gerarIntervaloFiltrado(inicio: number, fim: number, idade: number): void {\n    if (inicio > fim) {\n        console.error(\"Erro: O valor de início deve ser menor ou igual ao valor de fim.\");\n        return;\n    }\n\n    let numeros: number[] = [];\n    for (let i = inicio; i <= fim; i++) {\n        numeros.push(i);\n    }\n\n    let contador = 0;\n    for (let numero of numeros) {\n        if (numero % idade === 0 && idade % numero === 0) {\n            console.log(numero);\n            contador++;\n        }\n    }\n    console.log(`Total de números impressos: ${contador}`);\n}\n\nconst inicio = parseInt(prompt(\"Digite o início do intervalo:\") || \"0\");\nconst fim = parseInt(prompt(\"Digite o fim do intervalo:\") || \"0\");\nconst idade = parseInt(prompt(\"Digite sua idade para filtrar os números:\") || \"0\");\n\ngerarIntervaloFiltrado(inicio, fim, idade);"
+    }
+  },
+  "condicional": {
+    "questao1": {
+      "enunciado": "Crie um programa que leia um número e informe se ele é:\nPar ou Ímpar\nPositivo ou Negativo",
+      "codigo": "const numero = 5;\n\nif (numero % 2 === 0) {\n    console.log(\"O número é par.\");\n} else {\n    console.log(\"O número é ímpar.\");\n}\n\nif (numero > 0) {\n    console.log(\"O número é positivo.\");\n} else {\n    console.log(\"O número é negativo.\");\n}"
+    },
+    "questao2": {
+      "enunciado": "Crie um programa chamado Estações. Este programa deve ler uma data e armazenar na variável mês, um número entre 1 e 12, correspondendo a um dos meses do ano. No final, você deve imprimir uma mensagem conforme o exemplo: \"A estação do ano correspondente ao mês 3 é Verão\" Considere a estação prevalente para cada mês:\na) Janeiro (1): Verão\nb) Fevereiro (2): Verão\nc) Março (3): Verão\nd) Abril (4): Outono\ne) Maio (5): Outono\nf) Junho (6): Outono\ng) Julho (7): Inverno\nh) Agosto (8): Inverno\ni) Setembro (9): Inverno\nj) Outubro (10): Primavera\nk) Novembro (11): Primavera\nl) Dezembro (12): Primavera",
+      "codigo": "const mes :number = Number(prompt(\"informe um numero:\"))\n\nlet estacao: string;\n\nswitch (mes) {\n    case 1:\n        estacao = \"verão\";\n        break;\n    case 2:\n        estacao = \"verão\";\n        break;\n    case 3:\n        estacao = \"verão\";\n        break;\n    \n    case 4:\n        estacao = \"outono\";\n        break;\n    case 5:\n        estacao = \"outono\";\n        break;\n    case 6:\n        estacao = \"outono\";\n        break;\n\n    case 7:\n        estacao = \"inverno\";\n        break;\n    case 8:\n        estacao = \"inverno\";\n        break;\n    case 9:\n        estacao = \"inverno\";\n        break;\n\n    case 10:\n        estacao = \"primavera\";\n        break;\n    case 11:\n        estacao = \"primavera\";\n        break;\n    case 12:\n        estacao = \"primavera\";\n        break;\n\n    default:\n        estacao = \"mês inválido\";\n}\n\nconsole.log(\"A estação do ano correspondente ao mês \"+mes+\" é \"+estacao+\".\");"
+    },
+    "questao3": {
+      "enunciado": "Crie um programa que solicite dois números e simule um menu de uma calculadora:\n1 - Soma\n2 - Subtração\n3 - Multiplicação\n4 - Divisão\nUse switch...Case",
+      "codigo": "const num1: number = Number(prompt(\"informe um numero:\"))\nconst num2: number = Number(prompt(\"informe um segundo numero:\"))\nconst operacao: number = Number(prompt(\"\\n1- soma \\n2- subtração \\n3- multiplicação \\n4- divisão:\"));\nlet resultado: any;\nswitch (operacao) {\n    case 1:\n        resultado = num1 + num2;\n        break;\n    case 2:\n        resultado = num1 - num2;\n        break;\n    case 3:\n        resultado = num1 * num2;\n        break;\n    case 4:\n        resultado = num1 / num2;\n        break;\n    default:\n        resultado = \"Operação inválida\";\n}\nconsole.log(\"O resultado da operação é: \" + resultado);"
+    },
+    "questao4": {
+      "enunciado": "Ler dois valores e imprimir uma das três mensagens a seguir:\n'Números iguais', caso os números sejam iguais;\n'Primeiro é maior', caso o primeiro seja maior que o segundo;\n'Segundo maior', caso o segundo seja maior que o primeiro.",
+      "codigo": "function compararNumeros(num1: number, num2: number): string {\n    if (num1 === num2) {\n        return \"Números iguais\";\n    } else if (num1 > num2) {\n        return \"Primeiro é maior\";\n    } else {\n        return \"Segundo maior\";\n    }\n}\n\nconst numero1: number = Number(prompt(\"Informe o primeiro número:\"));\nconst numero2: number = Number(prompt(\"Informe o segundo número:\"));\n\nconst resultado: string = compararNumeros(numero1, numero2);\nconsole.log(resultado);"
+    }
+  },
+  "função": {
+    "questao1": {
+      "enunciado": "Crie uma função somarAte que recebe um número inteiro positivo. Use um laço de repetição para calcular a soma de todos os números de 1 até o número fornecido. (Ex: somarAte(4) deve retornar 10, pois 1+2+3+4 = 10).",
+      "codigo": "function somarAte(numero: number): number {\n    let soma = 0;\n    for (let i = 1; i <= numero; i++) {\n        soma += i;\n    }\n    return soma;\n}\n\nlet numero = parseInt(prompt(\"Digite um número inteiro positivo:\"));\nif (numero > 0) {\n    let resultado = somarAte(numero);\n    console.log(`A soma de 1 até ${numero} é: ${resultado}`);\n} else {\n    console.log(\"Por favor, digite um número inteiro positivo.\");\n}"
+    },
+    "questao2": {
+      "enunciado": "O IF tem uma estufa e o professor de biologia quer um sistema simples para monitorar a temperatura.\nCrie uma função ler_temperatura():\nSimula a leitura de um sensor, pedindo ao usuário para digitar uma temperatura (valor inteiro ou float).\nRetorna a temperatura lida.\nCrie uma função verificar_alerta_temperatura(temperatura):\nRecebe a temperatura.\nSe a temperatura for menor que 10 ou maior que 30, retorna True (alerta).\nCaso contrário, retorna False.\nCrie uma função emitir_mensagem_alerta(status_alerta):\nRecebe o status_alerta (True ou False).\nSe status_alerta for True, imprime \"ALERTA: Temperatura fora da faixa ideal!\".\nSe status_alerta for False, imprime \"Temperatura dentro da faixa normal.\".",
+      "codigo": "function ler_temperatura(): number {\n    let temperatura = parseFloat(prompt(\"Digite a temperatura atual (em °C):\"));\n    return temperatura;\n}\n\nfunction verificar_alerta_temperatura(temperatura: number): boolean {\n    if (temperatura < 10 || temperatura > 30) {\n        return true;\n    } else {\n        return false;\n    }\n}\n\nfunction emitir_mensagem_alerta(status_alerta: boolean): void {\n    if (status_alerta) {\n        console.log(\"ALERTA: Temperatura fora da faixa ideal!\");\n    } else {\n        console.log(\"Temperatura dentro da faixa normal.\");\n    }\n}\n\nlet temperatura_atual = ler_temperatura();\nlet alerta = verificar_alerta_temperatura(temperatura_atual);\nemitir_mensagem_alerta(alerta)"
+    },
+    "questao3": {
+      "enunciado": "Crie uma função que recebe um número (ex: 5) e em seguida utilize loops aninhados para desenhar um triângulo de asteriscos no console.\nExemplo para entrada 3:\n*\n***\n*****",
+      "codigo": "function desenharTriangulo(n: number): void {\n    for (let i = 1; i <= n; i++) {\n        let linha = \" \";\n        \n        for (let j = 1; j <= i; j++) {\n            linha += \"*\";\n        }\n        console.log(linha + \"<br>\");\n    }\n}\n\nlet numero = parseInt(prompt(\"Digite um número para desenhar o triângulo de asteriscos:\"));\nif (numero > 0) {\n    desenharTriangulo(numero);\n} else {\n    console.log(\"Por favor, digite um número inteiro positivo.\");\n}"
+    },
+    "questao4": {
+      "enunciado": "Crie uma função que recebe um valor de saque (inteiro).\nA função deve dizer quantas notas de 50, 20 e 10 são necessárias para o saque (priorizando as maiores). Use um laço while para ir subtraindo do valor total.",
+      "codigo": "function calcularNotas(saque: number): void {\n    let notas50 = 0;\n    let notas20 = 0;\n    let notas10 = 0;\n    \n    while (saque > 0) {\n        if (saque >= 50) {\n            notas50++;\n            saque -= 50;\n        } else if (saque >= 20) {\n            notas20++;\n            saque -= 20;\n        } else if (saque >= 10) {\n            notas10++;\n            saque -= 10;\n        }\n    }\n\n    console.log(`Notas de 50: ${notas50}`);\n    console.log(`Notas de 20: ${notas20}`);\n    console.log(`Notas de 10: ${notas10}`);\n}\n\nlet valorSaque = parseInt(prompt(\"Digite o valor do saque (inteiro):\"));\nif (valorSaque > 0) {\n    calcularNotas(valorSaque);\n} else {\n    console.log(\"Por favor, digite um valor de saque inteiro positivo.\");\n}"
+    },
+    "questao5": {
+      "enunciado": "Crie uma função que recebe dois números: início e fim. Depois use um laço para percorrer esse intervalo e imprimir apenas os números que são múltiplos de 3.",
+      "codigo": "function imprimirMultiplosDeTres(inicio: number, fim: number): void {\n    for (let i = inicio; i <= fim; i++) {\n        if (i % 3 === 0) {\n            console.log(i);\n        }\n    }\n}\n\nlet inicio = parseInt(prompt(\"Digite o número de início:\"));\nlet fim = parseInt(prompt(\"Digite o número de fim:\"));\nif (inicio < fim) {\n    imprimirMultiplosDeTres(inicio, fim);\n} else {\n    console.log(\"Por favor, certifique-se de que o número de início seja menor que o número de fim.\");\n}"
+    },
+    "questao6": {
+      "enunciado": "Faça um programa para o cálculo de uma folha de pagamento fictício, sabendo que os descontos são do Imposto de Renda, que depende do salário bruto (conforme tabela abaixo), 3% para o Sindicato, 6% de vale transporte, 8% de vale alimentação, 10% do INSS e o FGTS que corresponde a 11% do Salário Bruto, mas não é descontado (é a empresa que deposita). O Salário Líquido corresponde ao Salário Bruto menos os descontos. O programa deverá pedir ao usuário o valor da sua hora e a quantidade de horas trabalhadas no mês.\nDesconto do IR:\nSalário Bruto até R$ 2428,80 (inclusive) - isento\nSalário Bruto de R$ 2.428,81 a R$ 2.826,65 (inclusive) - desconto de 7,5%\nSalário Bruto de R$ 2.826,66 a R$ 3.751,05 (inclusive) - desconto de 15%\nSalário Bruto de R$ 3.751,06 a R$ 4.664,68 (inclusive) - desconto de 22,5%\nSalário Bruto acima de R$4664,68 - desconto de 27,5%.",
+      "codigo": "function calcularFolhaPagamento(valorHora: number, horasTrabalhadas: number): void {\n    const salarioBruto = valorHora * horasTrabalhadas;\n    let descontoIR = 0;\n    \n    if (salarioBruto <= 2428.80) {\n        descontoIR = 0;\n    } else if (salarioBruto <= 2826.65) {\n        descontoIR = salarioBruto * 0.075;\n    } else if (salarioBruto <= 3751.05) {\n        descontoIR = salarioBruto * 0.15;\n    } else if (salarioBruto <= 4664.68) {\n        descontoIR = salarioBruto * 0.225;\n    } else {\n        descontoIR = salarioBruto * 0.275;\n    }\n\n    const descontoSindicato = salarioBruto * 0.03;\n    const descontoValeTransporte = salarioBruto * 0.06;\n    const descontoValeAlimentacao = salarioBruto * 0.08;\n    const descontoINSS = salarioBruto * 0.10;\n    const fgts = salarioBruto * 0.11;\n    const totalDescontos = descontoIR + descontoSindicato + descontoValeTransporte + descontoValeAlimentacao + descontoINSS;\n    const salarioLiquido = salarioBruto - totalDescontos;\n\n    console.log(`Salário Bruto: (${valorHora} * ${horasTrabalhadas}) : R$ ${salarioBruto.toFixed(2)}`);\n    console.log(`(-) IR (${(descontoIR / salarioBruto * 100).toFixed(2)}%) : R$ ${descontoIR.toFixed(2)}`);\n    console.log(`(-) INSS (10%) : R$ ${descontoINSS.toFixed(2)}`);\n    console.log(`(-) SINDICATO (3%) : R$ ${descontoSindicato.toFixed(2)}`);\n    console.log(`(-) V. ALIMENTAÇÃO (8%) : R$ ${descontoValeAlimentacao.toFixed(2)}`);\n    console.log(`(-) V. TRANSPORTE (6%) : R$ ${descontoValeTransporte.toFixed(2)}`);\n    console.log(`FGTS (11%) : R$ ${fgts.toFixed(2)}`);\n    console.log(`Total de descontos : R$ ${totalDescontos.toFixed(2)}`);\n    console.log(`Salário Líquido : R$ ${salarioLiquido.toFixed(2)}`);\n}\n\nlet valorHora = parseFloat(prompt(\"Digite o valor da sua hora:\"));\nlet horasTrabalhadas = parseFloat(prompt(\"Digite a quantidade de horas trabalhadas no mês:\"));\n\nif (valorHora > 0 && horasTrabalhadas > 0) {\n    calcularFolhaPagamento(valorHora, horasTrabalhadas);\n}\nelse {\n    console.log(\"Por favor, digite valores positivos para o valor da hora e as horas trabalhadas.\");"
+    },
+    "questao7": {
+      "enunciado": "Sistema de Eficiência de Combustível\nCrie um programa que ajude um motorista a saber a autonomia do seu carro.\n\nFunção 1: Recebe a distância percorrida e a quantidade de combustível gasta, retornando o consumo médio (km/l).\nFunção 2: Recebe o consumo médio e a capacidade total do tanque, retornando quantos quilômetros o carro percorre com o tanque cheio.",
+      "codigo": "function calcularConsumoMedio(distancia: number, combustivelGasto: number): number {\n    return distancia / combustivelGasto;\n}\n\nfunction calcularAutonomia(consumoMedio: number, capacidadeTanque: number): number {\n    return consumoMedio * capacidadeTanque;\n}\n\nlet distancia = parseFloat(prompt(\"Digite a distância percorrida (em km):\"));\nlet combustivelGasto = parseFloat(prompt(\"Digite a quantidade de combustível gasta (em litros):\"));\nlet capacidadeTanque = parseFloat(prompt(\"Digite a capacidade total do tanque (em litros):\"));\n\nif (distancia > 0 && combustivelGasto > 0 && capacidadeTanque > 0) {\n    const consumoMedio = calcularConsumoMedio(distancia, combustivelGasto);\n    const autonomia = calcularAutonomia(consumoMedio, capacidadeTanque);\n    console.log(`Consumo médio: ${consumoMedio.toFixed(2)} km/l`);\n    console.log(`Autonomia com tanque cheio: ${autonomia.toFixed(2)} km`);\n} else {\n    console.log(\"Por favor, digite valores positivos para distância, combustível gasto e capacidade do tanque.\");\n}"
+    },
+    "questao8": {
+      "enunciado": "Controle de Estoque de Loja (Loop e Relatório)\nFaça um programa que gerencie a entrada de produtos em um estoque. O programa deve solicitar o preço unitário do produto e a quantidade comprada.\nCrie uma função que recebe preço e quantidade. Se a quantidade for maior que 10 unidades, aplica 5% de desconto sobre o valor total daquele item. Retorna o valor final.\nO programa deve repetir a solicitação até que o preço informado seja zero.\nAo encerrar, exiba o total geral investido no estoque e a média de preço dos produtos cadastrados.",
+      "codigo": "function calcularValorFinal(precoUnitario: number, quantidade: number): number {\n    let valorTotal = precoUnitario * quantidade;\n    if (quantidade > 10) {\n        valorTotal *= 0.95; // Aplica 5% de desconto\n    }\n    return valorTotal;\n}\n\nlet totalInvestido = 0;\nlet totalProdutos = 0;\n\nwhile (true) {\n    let precoUnitario = parseFloat(prompt(\"Digite o preço unitário do produto (ou 0 para encerrar):\"));\n    if (precoUnitario === 0) {\n        break;\n    }\n    let quantidade = parseInt(prompt(\"Digite a quantidade comprada:\"));\n    if (quantidade > 0) {\n        const valorFinal = calcularValorFinal(precoUnitario, quantidade);\n        totalInvestido += valorFinal;\n        totalProdutos += quantidade;\n    } else {\n        console.log(\"Por favor, digite uma quantidade positiva.\");\n    }\n}\n\nif (totalProdutos > 0) {\n    const mediaPrecos = totalInvestido / totalProdutos;\n    console.log(`Total investido no estoque: R$ ${totalInvestido.toFixed(2)}`);\n    console.log(`Média de preço dos produtos cadastrados: R$ ${mediaPrecos.toFixed(2)}`);\n} else {\n    console.log(\"Nenhum produto foi cadastrado.\");\n}"
+    },
+    "questao9": {
+      "enunciado": "Simulador de Aprovação de Crédito\nUma loja quer automatizar a análise de crédito de clientes.\nFunção solicitar_renda_mensal(): Pede a renda do usuário. Se o valor for negativo ou zero, pede novamente até ser válido.\nFunção analisar_credito(renda, valor_parcela): A parcela não pode ultrapassar 30% da renda.\nSe a renda for acima de R$ 5.000,00, o cliente ganha um bônus de R$ 500,00 no limite final.\nRetorna true para aprovado ou false para negado.\nFunção exibir_status(resultado): Imprime \"Crédito Aprovado\" ou \"Crédito Negado\".\nPeça a renda e o valor da parcela que o cliente deseja pagar, processe e mostre o resultado.",
+      "codigo": "function solicitarRendaMensal(): number {\n    let renda: number;\n    do {\n        renda = parseFloat(prompt(\"Digite sua renda mensal (valor positivo):\"));\n        if (renda <= 0) {\n            console.log(\"Por favor, digite um valor de renda mensal positivo.\");\n        }\n    } while (renda <= 0);\n    return renda;\n}\n\nfunction analisarCredito(renda: number, valorParcela: number): boolean {\n    const limiteParcela = renda * 0.3;\n    if (valorParcela > limiteParcela) {\n        return false; // Crédito negado\n    }\n    if (renda > 5000) {\n        return true; // Crédito aprovado com bônus\n    }\n    return true; // Crédito aprovado\n}\n\nfunction exibirStatus(resultado: boolean): void {\n    if (resultado) {\n        console.log(\"Crédito Aprovado\");\n    } else {\n        console.log(\"Crédito Negado\");\n    }\n}\n\nconst rendaMensal = solicitarRendaMensal();\nconst valorParcela = parseFloat(prompt(\"Digite o valor da parcela que deseja pagar:\"));\nconst resultadoAnalise = analisarCredito(rendaMensal, valorParcela);\nexibirStatus(resultadoAnalise);"
+    },
+    "questao10": {
+      "enunciado": "Calculadora de IMC com Classificação.\nUm personal trainer precisa de uma ferramenta para avaliar seus alunos.\nFunção calcular_imc(peso, altura): Retorna o resultado da fórmula IMC = peso/altura².\nFunção classificar_imc(valor_imc): Recebe o IMC e retorna uma string:\nAbaixo de 18.5: \"Abaixo do peso\"\nEntre 18.5 e 24.9: \"Peso Normal\"\n25 ou mais: \"Sobrepeso\"\nFunção exibir_laudo(nome, classificacao): Imprime: \"Paciente: [nome] - Status: [classificacao]\".\nUso: Peça o nome, peso e altura, processe os dados e exiba o laudo.",
+      "codigo": "function calcularIMC(peso: number, altura: number): number {\n    return peso / (altura * altura);\n}\n\nfunction classificarIMC(valorIMC: number): string {\n    if (valorIMC < 18.5) {\n        return \"Abaixo do peso\";\n    } else if (valorIMC >= 18.5 && valorIMC <= 24.9) {\n        return \"Peso Normal\";\n    } else {\n        return \"Sobrepeso\";\n    }\n}\n\nfunction exibirLaudo(nome: string, classificacao: string): void {\n    console.log(`Paciente: ${nome} - Status: ${classificacao}`);\n}\n\nconst nome = prompt(\"Digite o nome do paciente:\");\nconst peso = parseFloat(prompt(\"Digite o peso do paciente (em kg):\"));\nconst altura = parseFloat(prompt(\"Digite a altura do paciente (em metros):\"));\n\nconst imc = calcularIMC(peso, altura);\nconst classificacao = classificarIMC(imc);\nexibirLaudo(nome, classificacao);"
+    }
+  },
+  "repetição": {
+    "questao1": {
+      "enunciado": "Crie um programa que peça números até o usuário digitar 0 e mostre:\nQuantidade de números digitados\nSoma total",
+      "codigo": "let quantidadeNumeros: number = 0;\nlet somaTotal: number = 0;\nlet numero: number;\n\ndo {\n    numero = Number(prompt(\"Digite um número (0 para encerrar): \"));\n    if (numero !== 0) {\n        quantidadeNumeros++;\n        somaTotal += numero;\n    }\n} while (numero !== 0);\n\nconsole.log(`Quantidade de números digitados: ${quantidadeNumeros}`);\nconsole.log(`Soma total: ${somaTotal}`);"
+    },
+    "questao2": {
+      "enunciado": "Desenvolva a tabuada de um número usando for.",
+      "codigo": "function tabuada(numero: number): void {\n    console.log(`Tabuada do ${numero}:<br>`);\n    for (let i = 1; i <= 10; i++) {\n        console.log(`${numero} x ${i} = ${numero * i}<br>`);\n    }\n}\n\nconst numero: number = Number(prompt(\"Digite um número para ver a tabuada: \"));\ntabuada(numero);"
+    },
+    "questao3": {
+      "enunciado": "Faça um programa que leia nome, horas trabalhadas, salário-hora e sexo de um grupo de operários. Ao final de cada solicitação pergunte se o usuário quer continuar ou não o programa.\nCalcule e imprima:\nSalário total dos funcionários, o maior salário, juntamente com o nome de quem o recebeu;\nO número de funcionários do sexo masculino e feminino cadastrado;\nO percentual de funcionários homens e mulheres cadastrados.",
+      "codigo": "interface Funcionario {\n    nome: string;\n    horasTrabalhadas: number;\n    salarioHora: number;\n    sexo: string;\n}\n\nlet funcionarios: Funcionario[] = [];\n\nfunction cadastrarFuncionario(): void {\n    let funcionario: Funcionario = {\n        nome: prompt(\"Nome do funcionário: \") || \"\",\n        horasTrabalhadas: Number(prompt(\"Horas trabalhadas: \")) || 0,\n        salarioHora: Number(prompt(\"Salário por hora: \")) || 0,\n        sexo: prompt(\"Sexo (M/F): \") || \"\"\n    };\n    funcionarios.push(funcionario);\n    let continuar = prompt(\"Deseja cadastrar outro funcionário? (S/N): \");\n    if (continuar?.toUpperCase() === \"S\") {\n        cadastrarFuncionario();\n    }\n}\n\nfunction calcularResultados(): void {\n    let salarioTotal = 0;\n    let maiorSalario = 0;\n    let nomeMaiorSalario = \"\";\n    let countMasculino = 0;\n    let countFeminino = 0;\n\n    for (let funcionario of funcionarios) {\n        let salario = funcionario.horasTrabalhadas * funcionario.salarioHora;\n        salarioTotal += salario;\n        if (salario > maiorSalario) {\n            maiorSalario = salario;\n            nomeMaiorSalario = funcionario.nome;\n        }\n        if (funcionario.sexo.toUpperCase() === \"M\") {\n            countMasculino++;\n        } else if (funcionario.sexo.toUpperCase() === \"F\") {\n            countFeminino++;\n        }\n    }\n\n    let totalFuncionarios = countMasculino + countFeminino;\n    let percentualMasculino = (countMasculino / totalFuncionarios) * 100;\n    let percentualFeminino = (countFeminino / totalFuncionarios) * 100;\n\n    console.log(\"Salário total dos funcionários: \" + salarioTotal + \"<br>\");\n    console.log(\"Maior salário: \" + maiorSalario + \" (Funcionário: \" + nomeMaiorSalario + \")<br>\");\n    console.log(\"Número de funcionários masculinos: \" + countMasculino + \"<br>\");\n    console.log(\"Número de funcionários femininos: \" + countFeminino + \"<br>\");\n    console.log(\"Percentual de funcionários masculinos: \" + percentualMasculino + \"%<br>\");\n    console.log(\"Percentual de funcionários femininos: \" + percentualFeminino + \"%<br>\");\n}\n\ncadastrarFuncionario();\ncalcularResultados();"
+    },
+    "questao4": {
+      "enunciado": "Faça um programa que leia um conjunto de números (X) e imprima a quantidade de números pares (QPares) e a quantidade de números ímpares (QImpares) lidos. Admita que o valor -1 é utilizado como sentinela para fim de leitura.",
+      "codigo": "let QPares = 0;\nlet QImpares = 0;\nlet numero = 0;\n\nwhile (numero !== -1) {\n    numero = parseInt(prompt(\"Digite um número (-1 para sair):\"));\n    if (numero !== -1) {\n        if (numero % 2 === 0) {\n            QPares++;\n        } else {\n            QImpares++;\n        }\n    }\n}\n\nconsole.log(`Quantidade de números pares: ${QPares}`);\nconsole.log(`Quantidade de números ímpares: ${QImpares}`);"
+    },
+    "questao5": {
+      "enunciado": "Analisador de Desempenho de Vendas (Relatório de Equipe)\nImagine que você está gerenciando uma equipe de 5 vendedores.\nFunção classificarVenda(valor):\nSe valor < 1000: Retorna \"Bronze\"\nSe valor entre 1000 e 5000: Retorna \"Prata\"\nSe valor > 5000: Retorna \"Ouro\"\nO Programa:\n1. Use um laço for para pedir o valor da venda de cada um dos 5 vendedores.\n2. Dentro do laço, chame a função de classificação.\n3. Ao final, o programa deve exibir:\nO total de vendas da equipe (soma).\nQuem foi o vendedor com a maior venda (maior valor digitado).\nQuantos vendedores atingiram a categoria \"Ouro\".",
+      "codigo": "function classificarVenda(valor: number): string {\n    if (valor < 1000) {\n        return \"Bronze\";\n    } else if (valor >= 1000 && valor <= 5000) {\n        return \"Prata\";\n    } else {\n        return \"Ouro\";\n    }\n}\n\nlet totalVendas = 0;\nlet maiorVenda = 0;\nlet vendedorMaiorVenda = \"\";\nlet contOuro = 0;\n\nfor (let i = 1; i <= 5; i++) {\n    let valorVenda = parseFloat(prompt(`Digite o valor da venda do vendedor ${i}`));\n    totalVendas += valorVenda;\n    \n    let classificacao = classificarVenda(valorVenda);\n    if (classificacao === \"Ouro\") {\n        contOuro++;\n    }\n\n    if (valorVenda > maiorVenda) {\n        maiorVenda = valorVenda;\n        vendedorMaiorVenda = `Vendedor ${i}`;\n    }\n}\n\ndocument.write(`Total de vendas da equipe: R$ ${totalVendas.toFixed(2)}<br>`);\ndocument.write(`Vendedor com a maior venda: ${vendedorMaiorVenda} (R$ ${maiorVenda.toFixed(2)})<br>`);\ndocument.write(`Quantidade de vendedores na categoria Ouro: ${contOuro}`);"
+    }
+  }
+};
+
+const select = document.getElementById('questionSelect');
+const enunciado = document.getElementById('enunciado');
+const resultadoDiv = document.getElementById('resultado');
+const codigoPre = document.getElementById('codigo-js');
+
+// Populate select
+for (const category in data) {
+    for (const questao in data[category]) {
+        const option = document.createElement('option');
+        option.value = `${category}-${questao}`;
+        option.textContent = `${category.charAt(0).toUpperCase() + category.slice(1)} - Questão ${questao.replace('questao', '')}`;
+        select.appendChild(option);
+    }
+}
+
+select.addEventListener('change', () => {
+    if (!select.value) {
+        enunciado.innerHTML = 'Selecione uma questão para ver o enunciado.';
+        codigoPre.textContent = 'Selecione uma questão para ver o código.';
+        return;
+    }
+    const [category, questao] = select.value.split('-');
+    enunciado.innerHTML = data[category][questao].enunciado.replace(/\n/g, '<br>');
+    codigoPre.textContent = 'Clique em Executar Código para carregar o script desta questão.';
+    resultadoDiv.innerText = '';
+});
+
+function getJSPath(category, questao) {
+    const fileName = category === 'condicional' && questao === 'questao1' ? 'Cquestao1.js' : `${questao}.js`;
+    return `dist/exercicios/${category}/${fileName}`;
+}
+
+// Override console.log
+console.log = function(...args) {
+    const linha = args.map(arg => {
+        if (Array.isArray(arg)) return "[" + arg.join(", ") + "]";
+        if (typeof arg === 'object') return JSON.stringify(arg);
+        return arg;
+    }).join(" ");
+    
+    resultadoDiv.innerText += linha + "\n";
+};
+
+document.write = function(...args) {
+    resultadoDiv.innerText += args.join('');
+};
+
+async function executarQuestao() {
+    if (!select.value) {
+        resultadoDiv.innerText = 'Selecione uma questão antes de executar.';
+        return;
+    }
+    resultadoDiv.innerText = '';
+    const antigo = document.getElementById('executor');
+    if (antigo) antigo.remove();
+
+    const [category, questao] = select.value.split('-');
+    const jsPath = getJSPath(category, questao);
+
+    try {
+        const response = await fetch(encodeURI(jsPath));
+        if (!response.ok) throw new Error(response.status + ' ' + response.statusText);
+        const code = await response.text();
+        codigoPre.textContent = code;
+
+        const script = document.createElement('script');
+        script.id = 'executor';
+        script.textContent = '(function(){\n' + code + '\n})();';
+        document.body.appendChild(script);
+    } catch (error) {
+        resultadoDiv.innerText = 'Erro ao carregar ou executar o arquivo: ' + error;
+    }
+}
+</script>
+<img src="src/img/gif.gif" alt="Decoração" class="floating-gif">
+</body>
+</html>
